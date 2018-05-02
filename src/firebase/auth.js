@@ -1,4 +1,4 @@
-import { auth } from './firebase';
+import { auth,googleProvider } from './firebase';
 
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -19,3 +19,7 @@ export const doPasswordReset = (email) =>
 // Password Change
 export const doPasswordUpdate = (password) =>
   auth.currentUser.updatePassword(password);
+
+//Google Login
+export const loginWithGoogle = () =>
+    auth.signInWithPopup(googleProvider);

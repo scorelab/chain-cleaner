@@ -3,7 +3,7 @@ import { Link,withRouter, } from 'react-router-dom';
 
 import * as routes from '../constants/routes';
 import { auth } from '../firebase';
-import { GoogleLogin } from './LoginwithGoogle';
+import LoginwithGoogle from './LoginwithGoogle';
 
 const INITIAL_STATE = {
   username: '',
@@ -149,7 +149,7 @@ class SignUpForm extends Component {
                             <hr />
                             <div className="text-center p-t-15">
                                 <span className="txt1">
-                                    <GoogleLogin />
+                                    <LoginwithGoogle />
                                 </span>
                             </div>
 

@@ -15,7 +15,7 @@ const Navigation = () =>
   </AuthUserContext.Consumer>
 
 const NavigationAuth = () =>
-     <Navbar inverse collapseOnSelect fixed style={{borderRadius:'0'}}>
+     <Navbar inverse collapseOnSelect style={{borderRadius:'0'}}>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={routes.HOME}>Chain Kleaner</Link>

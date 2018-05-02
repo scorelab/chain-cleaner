@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import { SignUpLink } from './SignUp';
 import { PasswordForgetLink } from './PasswordForget';
-import { GoogleLogin } from './LoginwithGoogle';
+import LoginwithGoogle from './LoginwithGoogle';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 
@@ -127,7 +127,7 @@ class SignInForm extends Component {
                             <hr />
                             <div className="text-center p-t-15">
                                 <span className="txt1">
-                                    <GoogleLogin />
+                                    <LoginwithGoogle />
                                 </span>
                             </div>
 
