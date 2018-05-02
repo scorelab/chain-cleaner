@@ -79,8 +79,8 @@ class SignInForm extends Component {
                                   onChange={event => this.setState(byPropKey('email', event.target.value))}
                                   type="text"
                                   className="input100"
+                                  placeholder="Email"
                                 />
-                                <span className="focus-input100" data-placeholder="Email" />
                             </div>
 
                             <div className="wrap-input100 validate-input" data-validate="Enter password">
@@ -92,8 +92,8 @@ class SignInForm extends Component {
                                   onChange={event => this.setState(byPropKey('password', event.target.value))}
                                   type="password"
                                   className="input100"
+                                  placeholder="Password"
                                 />
-                                <span className="focus-input100" data-placeholder="Password" />
                             </div>
 
                             <div className="container-login100-form-btn">
@@ -102,10 +102,16 @@ class SignInForm extends Component {
                                     <button className="login100-form-btn" disabled={isInvalid} type="submit">
                                       Sign In
                                     </button>
-
-                                    { error && <p>{error.message}</p> }
                                 </div>
                             </div>
+
+
+                             <div className="text-center p-t-10">
+                                <span className="txt1">
+                                     { error && <p style={{color:'#aa1d1d'}}>{error.message}</p> }
+                                </span>
+                            </div>
+
                             <div className="text-center p-t-10">
                                 <span className="txt1">
                                      <PasswordForgetLink />
