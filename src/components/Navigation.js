@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Navbar,Nav,NavItem} from 'react-bootstrap';
+import { LinkContainer } from "react-router-bootstrap";
 
 import AuthUserContext from './AuthUserContext';
 import SignOutButton from './SignOut';
@@ -27,9 +28,11 @@ const NavigationAuth = () =>
             <NavItem eventKey={1} href="#">
               Home
             </NavItem>
-            <NavItem eventKey={2} href="#">
-              Report Heists
-            </NavItem>
+            <LinkContainer to="/report-heists">
+                <NavItem eventKey={2}>
+                  Report Heists
+                </NavItem>
+             </LinkContainer>
             <NavItem eventKey={3}>
               <SignOutButton/>
             </NavItem>

@@ -6,7 +6,6 @@ import { auth } from '../firebase';
 import LoginwithGoogle from './LoginwithGoogle';
 
 const INITIAL_STATE = {
-  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -31,7 +30,6 @@ class SignUpForm extends Component {
 
   onSubmit = (event) => {
     const {
-      username,
       email,
       passwordOne,
     } = this.state;
@@ -55,7 +53,6 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      username,
       email,
       passwordOne,
       passwordTwo,
@@ -65,8 +62,7 @@ class SignUpForm extends Component {
      const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '' ||
-      username === '';
+      email === '';
 
     return (
            <div className="limiter">
@@ -82,25 +78,15 @@ class SignUpForm extends Component {
 
                             <div className="wrap-input100 validate-input">
                                 <input
-                                  value={username}
-                                  onChange={event => this.setState(byPropKey('username', event.target.value))}
-                                  type="text"
-                                  className="input100"
-                                />
-                                <span className="focus-input100" data-placeholder="Username" />
-                            </div>
-
-                            <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                                <input
                                   value={email}
                                   onChange={event => this.setState(byPropKey('email', event.target.value))}
                                   type="text"
                                   className="input100"
+                                  placeholder="Email Address"
                                 />
-                                <span className="focus-input100" data-placeholder="Email" />
                             </div>
 
-                            <div className="wrap-input100 validate-input" data-validate="Enter password">
+                            <div className="wrap-input100 validate-input">
                                 <span className="btn-show-pass">
                                     <i className="zmdi zmdi-eye" />
                                 </span>
@@ -109,21 +95,21 @@ class SignUpForm extends Component {
                                   onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
                                   type="password"
                                   className="input100"
+                                  placeholder="Password"
                                 />
-                                <span className="focus-input100" data-placeholder="Password" />
                             </div>
 
-                            <div className="wrap-input100 validate-input" data-validate="password">
+                            <div className="wrap-input100 validate-input">
                                 <span className="btn-show-pass">
                                     <i className="zmdi zmdi-eye" />
                                 </span>
-                                 <input
+                                <input
                                   value={passwordTwo}
                                   onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
                                   type="password"
                                   className="input100"
+                                  placeholder="Confirm Password"
                                 />
-                                <span className="focus-input100" data-placeholder="Confirm Password" />
                             </div>
 
                             <div className="container-login100-form-btn">
@@ -132,10 +118,15 @@ class SignUpForm extends Component {
                                     <button className="login100-form-btn" disabled={isInvalid} type="submit">
                                       Sign Up
                                     </button>
-
-                                    { error && <p>{error.message}</p> }
                                 </div>
                             </div>
+
+                             <div className="text-center p-t-10">
+                                <span className="txt1">
+                                     { error && <p style={{color:'#aa1d1d'}}>{error.message}</p> }
+                                </span>
+                            </div>
+
                             <div className="text-center p-t-15">
                                 <span className="txt1">
                                     <p>
