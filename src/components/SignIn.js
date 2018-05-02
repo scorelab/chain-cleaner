@@ -3,15 +3,13 @@ import { withRouter } from 'react-router-dom';
 
 import { SignUpLink } from './SignUp';
 import { PasswordForgetLink } from './PasswordForget';
+import { GoogleLogin } from './LoginwithGoogle';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 
 const SignInPage = ({ history }) =>
   <div>
-    <h1>SignIn</h1>
     <SignInForm history={history} />
-    <PasswordForgetLink />
-    <SignUpLink />
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -27,7 +25,6 @@ const INITIAL_STATE = {
 class SignInForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = { ...INITIAL_STATE };
   }
 
@@ -51,7 +48,7 @@ class SignInForm extends Component {
       });
 
     event.preventDefault();
-  }
+  };
 
   render() {
     const {
@@ -65,25 +62,73 @@ class SignInForm extends Component {
       email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={email}
-          onChange={event => this.setState(byPropKey('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={password}
-          onChange={event => this.setState(byPropKey('password', event.target.value))}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+            <div className="limiter">
+                <div className="container-login100 back-login">
+                    <div className="wrap-login100">
+                        <form className="login100-form validate-form" onSubmit={this.onSubmit}>
+                            <span className="login100-form-title p-b-26" style={{color:'#52595b', fontSize:'16px',fontFamily: 'Poppins-Regular'}}>
+                                Welcome to the
+                            </span>
+                            <span className="login100-form-title p-b-48">
+                                <img src={require('../../public/images/l.jpeg')} style={{width:'240px'}} alt="true" />
+                            </span>
 
-        { error && <p>{error.message}</p> }
-      </form>
+                            <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                                <input
+                                  value={email}
+                                  onChange={event => this.setState(byPropKey('email', event.target.value))}
+                                  type="text"
+                                  className="input100"
+                                />
+                                <span className="focus-input100" data-placeholder="Email" />
+                            </div>
+
+                            <div className="wrap-input100 validate-input" data-validate="Enter password">
+                                <span className="btn-show-pass">
+                                    <i className="zmdi zmdi-eye" />
+                                </span>
+                                 <input
+                                  value={password}
+                                  onChange={event => this.setState(byPropKey('password', event.target.value))}
+                                  type="password"
+                                  className="input100"
+                                />
+                                <span className="focus-input100" data-placeholder="Password" />
+                            </div>
+
+                            <div className="container-login100-form-btn">
+                                <div className="wrap-login100-form-btn">
+                                    <div className="login100-form-bgbtn"/>
+                                    <button className="login100-form-btn" disabled={isInvalid} type="submit">
+                                      Sign In
+                                    </button>
+
+                                    { error && <p>{error.message}</p> }
+                                </div>
+                            </div>
+                            <div className="text-center p-t-10">
+                                <span className="txt1">
+                                     <PasswordForgetLink />
+                                </span>
+                            </div>
+
+                            <div className="text-center p-t-15">
+                                <span className="txt1">
+                                    <SignUpLink />
+                                </span>
+                            </div>
+
+                            <hr />
+                            <div className="text-center p-t-15">
+                                <span className="txt1">
+                                    <GoogleLogin />
+                                </span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
     );
   }
 }

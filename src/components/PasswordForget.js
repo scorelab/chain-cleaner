@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { auth } from '../firebase';
+import * as routes from "../constants/routes";
 
 const PasswordForgetPage = () =>
   <div>
-    <h1>PasswordForget</h1>
     <PasswordForgetForm />
   </div>
 
@@ -48,19 +48,50 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={this.state.email}
-          onChange={event => this.setState(byPropKey('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
+        <div className="limiter">
+                <div className="container-login100 back-login">
+                    <div className="wrap-login100">
+                        <form className="login100-form validate-form" onSubmit={this.onSubmit}>
+                            <span className="login100-form-title p-b-26" style={{color:'#52595b', fontSize:'16px',fontFamily: 'Poppins-Regular'}}>
+                                Welcome to the
+                            </span>
+                            <span className="login100-form-title p-b-48">
+                                <img src={require('../../public/images/l.jpeg')} style={{width:'240px'}} alt="true" />
+                            </span>
 
-        { error && <p>{error.message}</p> }
-      </form>
+                            <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                                <input
+                                  value={email}
+                                  onChange={event => this.setState(byPropKey('email', event.target.value))}
+                                  type="text"
+                                  className="input100"
+                                />
+                                <span className="focus-input100" data-placeholder="Email" />
+                            </div>
+
+                            <div className="container-login100-form-btn">
+                                <div className="wrap-login100-form-btn">
+                                    <div className="login100-form-bgbtn"/>
+                                    <button className="login100-form-btn" disabled={isInvalid} type="submit">
+                                     Reset My Password
+                                    </button>
+
+                                    { error && <p>{error.message}</p> }
+                                </div>
+                            </div>
+                            <div className="text-center p-t-10">
+                                <span className="txt1">
+                                    <p>
+                                     Have an account?
+                                     {' '}
+                                     <Link to={routes.SIGN_IN}><b>Sign In</b></Link>
+                                    </p>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
     );
   }
 }
