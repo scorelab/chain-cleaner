@@ -66,7 +66,7 @@ class SignInForm extends Component {
                 <div className="container-login100 back-login">
                     <div className="wrap-login100">
                         <form className="login100-form validate-form" onSubmit={this.onSubmit}>
-                            <span className="login100-form-title p-b-26" style={{color:'#52595b', fontSize:'16px',fontFamily: 'Poppins-Regular'}}>
+                            <span className="login100-form-title p-b-1" style={{marginTop:"-40px", color:'#52595b', fontSize:'16px',fontFamily: 'Poppins-Regular'}}>
                                 Welcome to the
                             </span>
                             <span className="login100-form-title p-b-48">

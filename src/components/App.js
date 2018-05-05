@@ -12,6 +12,7 @@ import AccountPage from './Account';
 import * as routes from '../constants/routes';
 import withAuthentication from './withAuthentication';
 import LoginwithGoogle from "./LoginwithGoogle";
+import LandingPage from "./Landing";
 
 const App = () =>
   <Router>
@@ -20,7 +21,7 @@ const App = () =>
       {/*<hr/>*/}
       <Route
         exact path={routes.LANDING}
-        component={() => <SignInPage />}
+        component={() => <LandingPage />}
       />
       <Route
         exact path={routes.SIGN_UP}

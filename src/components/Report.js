@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 
 import Navigation from './Navigation';
 import withAuthorization from './withAuthorization';
-import TagsInput from 'react-tagsinput'
-import 'react-tagsinput/react-tagsinput.css'
 
 
 const ReportPage = () =>
@@ -16,20 +14,10 @@ const ReportPage = () =>
 class ReportForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {tags: []}
-      }
-
-      handleChange(tags) {
-        this.setState({tags})
-      }
-
-      handleChangeInput(tag) {
-        this.setState({tag})
       }
 
 
     render() {
-        const { tags, suggestions } = this.state;
 
         return(
             <div className="container middle-pages">
@@ -67,12 +55,7 @@ class ReportForm extends Component {
                           </div>
                             <div>
                                 <label>Transactions</label>
-                                <TagsInput
-                                    value={this.state.tags}
-                                    onChange={this.handleChange}
-                                    inputValue={this.state.tag}
-                                    onChangeInput={this.handleChangeInput}
-                                  />
+
                             </div>
                           <button type="submit" className="btn btn-primary mb-2">Submit Heist</button>
                         </form>

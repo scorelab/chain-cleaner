@@ -25,9 +25,11 @@ const NavigationAuth = () =>
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">
-              Home
-            </NavItem>
+            <LinkContainer to="/">
+                <NavItem eventKey={1}>
+                  Home
+                </NavItem>
+             </LinkContainer>
             <LinkContainer to="/report-heists">
                 <NavItem eventKey={2}>
                   Report Heists
@@ -41,9 +43,21 @@ const NavigationAuth = () =>
       </Navbar>;
 
 const NavigationNonAuth = () =>
-  <ul>
-    <li><Link to={routes.LANDING}>Landing</Link></li>
-    <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
-  </ul>
-
+    <Navbar collapseOnSelect style={{borderRadius:'0'}}>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to={routes.HOME}>Chain Kleaner</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <LinkContainer to="/signin">
+                <NavItem eventKey={2}>
+                  Sign In
+                </NavItem>
+             </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>;
 export default Navigation;

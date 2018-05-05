@@ -37,7 +37,7 @@ class LoginwithGoogle extends Component {
                     user
                   });
                   console.log(user.email);
-                  history.push(routes.HOME);
+                  history.push(routes.LANDING);
               })
               .catch(error => {
                 this.setState(byPropKey('error', error));
