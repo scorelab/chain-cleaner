@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link,withRouter, } from 'react-router-dom';
 
 import * as routes from '../constants/routes';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import LoginwithGoogle from './LoginwithGoogle';
 
 const INITIAL_STATE = {
+  username:'',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -30,6 +31,7 @@ class SignUpForm extends Component {
 
   onSubmit = (event) => {
     const {
+      username,
       email,
       passwordOne,
     } = this.state;
@@ -40,8 +42,15 @@ class SignUpForm extends Component {
 
     auth.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-         history.push(routes.HOME);
+         // Create a user in your own accessible Firebase Database too
+         db.doCreateUser(authUser.uid, username, email)
+          .then(() => {
+            this.setState(() => ({ ...INITIAL_STATE }));
+            history.push(routes.LANDING);
+          })
+          .catch(error => {
+            this.setState(byPropKey('error', error));
+          });
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
@@ -53,6 +62,7 @@ class SignUpForm extends Component {
 
   render() {
     const {
+      username,
       email,
       passwordOne,
       passwordTwo,
@@ -62,10 +72,11 @@ class SignUpForm extends Component {
      const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '';
+      email === '' ||
+      username === '';
 
     return (
-           <div className="limiter">
+           <div className="limiter main-back">
                 <div className="container-login100 back-login">
                     <div className="wrap-login100">
                         <form className="login100-form validate-form" onSubmit={this.onSubmit}>
@@ -78,9 +89,19 @@ class SignUpForm extends Component {
 
                             <div className="wrap-input100 validate-input">
                                 <input
+                                  value={username}
+                                  onChange={event => this.setState(byPropKey('username', event.target.value))}
+                                  type="text"
+                                  className="input100"
+                                  placeholder="Enter Name"
+                                />
+                            </div>
+
+                            <div className="wrap-input100 validate-input">
+                                <input
                                   value={email}
                                   onChange={event => this.setState(byPropKey('email', event.target.value))}
-                                  type="text"
+                                  type="email"
                                   className="input100"
                                   placeholder="Email Address"
                                 />

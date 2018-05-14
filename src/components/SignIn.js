@@ -41,7 +41,7 @@ class SignInForm extends Component {
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        history.push(routes.HOME);
+        history.push(routes.LANDING);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
@@ -62,7 +62,7 @@ class SignInForm extends Component {
       email === '';
 
     return (
-            <div className="limiter">
+            <div className="limiter main-back">
                 <div className="container-login100 back-login">
                     <div className="wrap-login100">
                         <form className="login100-form validate-form" onSubmit={this.onSubmit}>

@@ -19,7 +19,7 @@ const NavigationAuth = () =>
      <Navbar inverse collapseOnSelect style={{borderRadius:'0'}}>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={routes.HOME}>Chain Kleaner</Link>
+            <Link to={routes.LANDING}>Chain Kleaner</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -46,7 +46,7 @@ const NavigationNonAuth = () =>
     <Navbar collapseOnSelect style={{borderRadius:'0'}}>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={routes.HOME}>Chain Kleaner</Link>
+            <Link to={routes.LANDING}>Chain Kleaner</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
