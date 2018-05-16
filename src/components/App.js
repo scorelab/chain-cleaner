@@ -13,6 +13,7 @@ import * as routes from '../constants/routes';
 import withAuthentication from './withAuthentication';
 import LoginwithGoogle from "./LoginwithGoogle";
 import LandingPage from "./Landing";
+import TaintPage from "./Taint";
 
 const App = () =>
   <Router>
@@ -50,6 +51,10 @@ const App = () =>
       <Route
         exact path={routes.REPORT_HEISTS}
         component={() => <ReportPage />}
+      />
+      <Route
+        exact path={routes.TAINT}
+        component={() => <TaintPage />}
       />
     </div>
   </Router>

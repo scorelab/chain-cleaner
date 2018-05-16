@@ -26,16 +26,21 @@ const NavigationAuth = () =>
         <Navbar.Collapse>
           <Nav pullRight>
             <LinkContainer to="/">
-                <NavItem eventKey={1}>
+                <NavItem>
                   Home
                 </NavItem>
              </LinkContainer>
-            <LinkContainer to="/report-heists">
+              <LinkContainer to="/taint-analyze">
                 <NavItem eventKey={2}>
+                  Taint Analysis
+                </NavItem>
+             </LinkContainer>
+            <LinkContainer to="/report-heists">
+                <NavItem eventKey={3}>
                   Report Heists
                 </NavItem>
              </LinkContainer>
-            <NavItem eventKey={3}>
+            <NavItem eventKey={4}>
               <SignOutButton/>
             </NavItem>
           </Nav>
@@ -52,11 +57,16 @@ const NavigationNonAuth = () =>
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <LinkContainer to="/signin">
-                <NavItem eventKey={2}>
-                  Sign In
-                </NavItem>
-             </LinkContainer>
+              <LinkContainer to="/taint-analyze">
+                  <NavItem eventKey={2}>
+                      Taint Analysis
+                  </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/signin">
+                  <NavItem eventKey={3}>
+                      Sign In
+                  </NavItem>
+              </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>;

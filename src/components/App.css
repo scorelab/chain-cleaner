@@ -117,4 +117,11 @@
     overflow-y: auto;
 }
 
-/*time-line-css*/
+.poison-table >thead> tr > th {
+    font-size: 9px !important;
+    text-align: center;
+}
+
+.poison-table >tbody> tr > td > a {
+    font-size: 8px !important;
+}
