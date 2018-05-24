@@ -16,7 +16,7 @@ const Navigation = () =>
   </AuthUserContext.Consumer>
 
 const NavigationAuth = () =>
-     <Navbar inverse collapseOnSelect style={{borderRadius:'0'}}>
+     <Navbar inverse collapseOnSelect style={{borderRadius:'0',backgroundColor:"#1C2027"}}>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={routes.LANDING}>Chain Kleaner</Link>
@@ -48,7 +48,7 @@ const NavigationAuth = () =>
       </Navbar>;
 
 const NavigationNonAuth = () =>
-    <Navbar collapseOnSelect style={{borderRadius:'0'}}>
+    <Navbar inverse collapseOnSelect style={{borderRadius:'0',backgroundColor:"#1C2027"}}>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={routes.LANDING}>Chain Kleaner</Link>
@@ -57,11 +57,21 @@ const NavigationNonAuth = () =>
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
+               <LinkContainer to="/">
+                <NavItem>
+                  Home
+                </NavItem>
+             </LinkContainer>
               <LinkContainer to="/taint-analyze">
                   <NavItem eventKey={2}>
                       Taint Analysis
                   </NavItem>
               </LinkContainer>
+               <LinkContainer to="/report-heists">
+                <NavItem eventKey={3}>
+                  Report Heists
+                </NavItem>
+             </LinkContainer>
               <LinkContainer to="/signin">
                   <NavItem eventKey={3}>
                       Sign In

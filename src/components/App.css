@@ -112,9 +112,7 @@
 }
 
 .heistPopup{
-    width:80vh;
-    max-height:90vh;
-    overflow-y: auto;
+    width:70vh;
 }
 
 .poison-table >thead> tr > th {

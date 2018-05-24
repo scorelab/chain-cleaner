@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import withAuthorization from "./withAuthorization";
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
@@ -92,5 +91,5 @@ class HeistTimeline extends Component {
     }
 }
 
-const authCondition = (authUser) => !!authUser;
-export default withAuthorization(authCondition)(HeistTimeline);
+// const authCondition = (authUser) => !!authUser;
+export default HeistTimeline;

@@ -16,7 +16,7 @@ class Landing extends Component {
         return(
             <div className="container-fluid" style={{paddingLeft:"0", paddingRight:"0", backgroundColor:"#ffffff"}}>
                 <header className="masthead text-white text-center" style={{marginTop:"-20px"}}>
-                  <div className="overlay"  style={{zIndex:"1", position:"absolute"}}/>
+
                   <div className="container">
                     <div className="row" style={{height:"200px"}}>
                       <div className="col-xl-9 mx-auto">
@@ -34,7 +34,7 @@ class Landing extends Component {
                        </div>
                     </div>
                     </div>
-                  </div>
+                    </div>
                 </header>
 
                 <div className="container">
