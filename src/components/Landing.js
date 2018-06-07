@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Navigation from './Navigation';
+import MempoolTable from './Mempool'
 
 const LandingPage = () =>
   <div>
@@ -38,48 +39,7 @@ class Landing extends Component {
                 </header>
 
                 <div className="container">
-                    <div className="row" style={{marginTop:"30px"}}>
-                        <h4 style={{textAlign: "center",color:"#4D4F4E"}}><b>Memory Pool</b></h4>
-                        <h6 style={{textAlign: "center",color:"#4D4F4E"}}>(no of txs: 14, size: 168.81 kB)</h6>
-                        <div className="col-xl-9 mx-auto" style={{marginTop:"10px"}}>
-                            <table id="memPool" className="table table-bordered">
-                                <thead>
-                                <tr className="table-striped">
-                                    <th>AGE [H:M:S]</th>
-                                    <th>TRANSACTION HASH</th>
-                                    <th>FEE</th>
-                                    <th>TX SIZE[KB]</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>00:00:12</td>
-                                    <td><a href="#">77f1c71f5ab2085fd7be0c78433563ad73cd3ce8a539d824acfca4bced41bb35</a></td>
-                                    <td>0.010</td>
-                                    <td>13.4</td>
-                                </tr>
-                                <tr>
-                                    <td>00:00:12</td>
-                                    <td>77f1c71f5ab2085fd7be0c78433563ad73cd3ce8a539d824acfca4bced41bb35</td>
-                                    <td>0.010</td>
-                                    <td>13.4</td>
-                                </tr>
-                                <tr>
-                                    <td>00:00:12</td>
-                                    <td>77f1c71f5ab2085fd7be0c78433563ad73cd3ce8a539d824acfca4bced41bb35</td>
-                                    <td>0.010</td>
-                                    <td>13.4</td>
-                                </tr>
-                                <tr>
-                                    <td>00:00:12</td>
-                                    <td>77f1c71f5ab2085fd7be0c78433563ad73cd3ce8a539d824acfca4bced41bb35</td>
-                                    <td>0.010</td>
-                                    <td>13.4</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <MempoolTable/>
                 </div>
             </div>
         );
