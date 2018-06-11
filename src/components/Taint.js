@@ -25,21 +25,33 @@ class Taint extends Component {
                               <h4>Input Type - Address</h4>
                               <h5>Address/Tx Hash - adsasdnaldjnasdadasdnasldnadadasdsldnasldjnasd</h5>
                           </div>
+                          <div className="pull-right" style={{marginTop:"-40px"}}>
+                              <div>
+                                  <div style={{backgroundColor:"#8D9ECC", height:"14px", width:"14px",marginLeft:"-30px"}}/>
+                                  <p style={{marginLeft:"-5px", marginTop:"-18px", marginRight:"30px"}}>Tainted</p>
+                              </div>
+                              <div>
+                                  <div style={{backgroundColor:"#355080", height:"14px", width:"14px",marginLeft:"-30px"}}/>
+                                  <p style={{marginLeft:"-5px", marginTop:"-18px", marginRight:"30px"}}>Not Tainted</p>
+                              </div>
+                          </div>
                       </div>
-                      <div className="row" style={{marginTop:"30px"}}>
-                            <div className="col-md-4" style={{borderRight:"2px solid #e4e4e4",padding:"0 50px 0 50px"}}>
-                              <PieChart
-                                  slices={[
-                                    {
-                                      color: '#e05414',
-                                      value: 10,
-                                    },
-                                    {
-                                      color: '#309e1a',
-                                      value: 90,
-                                    },
-                                  ]}
-                                />
+                      <div className="row" style={{marginTop:"50px"}}>
+                            <div className="col-md-4" style={{borderRight:"2px solid #e4e4e4"}}>
+                              <div style={{padding:"0 70px 0 70px"}}>
+                                  <PieChart
+                                      slices={[
+                                        {
+                                          color: '#8D9ECC',
+                                          value: 60,
+                                        },
+                                        {
+                                          color: '#355080',
+                                          value: 40,
+                                        },
+                                      ]}
+                                    />
+                              </div>
                                 <p style={{textAlign:"center"}}>Poison Policy</p>
                                 <table className="table table-bordered poison-table" style={{marginTop:"30px"}}>
                                     <thead>
@@ -63,19 +75,21 @@ class Taint extends Component {
                                     </tbody>
                                 </table>
                           </div>
-                          <div className="col-md-4"  style={{borderRight:"2px solid #e4e4e4",padding:"0 50px 0 50px"}}>
-                              <PieChart
-                                  slices={[
-                                    {
-                                      color: '#e05414',
-                                      value: 30,
-                                    },
-                                    {
-                                      color: '#309e1a',
-                                      value: 70,
-                                    },
-                                  ]}
-                                />
+                          <div className="col-md-4"  style={{borderRight:"2px solid #e4e4e4"}}>
+                             <div style={{padding:"0 70px 0 70px"}}>
+                                  <PieChart
+                                      slices={[
+                                        {
+                                          color: '#8D9ECC',
+                                          value: 60,
+                                        },
+                                        {
+                                          color: '#355080',
+                                          value: 40,
+                                        },
+                                      ]}
+                                    />
+                              </div>
                               <p style={{textAlign:"center"}}>Haircut Policy</p>
                               <table className="table table-bordered poison-table" style={{marginTop:"30px"}}>
                                     <thead>
@@ -99,19 +113,21 @@ class Taint extends Component {
                                     </tbody>
                                 </table>
                           </div>
-                          <div className="col-md-4" style={{padding:"0 50px 0 50px"}}>
-                              <PieChart
-                                  slices={[
-                                    {
-                                      color: '#e05414',
-                                      value: 60,
-                                    },
-                                    {
-                                      color: '#309e1a',
-                                      value: 40,
-                                    },
-                                  ]}
-                                />
+                          <div className="col-md-4" >
+                              <div style={{padding:"0 70px 0 70px"}}>
+                                  <PieChart
+                                      slices={[
+                                        {
+                                          color: '#8D9ECC',
+                                          value: 60,
+                                        },
+                                        {
+                                          color: '#355080',
+                                          value: 40,
+                                        },
+                                      ]}
+                                    />
+                              </div>
                               <p style={{textAlign:"center"}}>FIFO Policy</p>
                               <table className="table table-bordered poison-table" style={{marginTop:"30px"}}>
                                     <thead>

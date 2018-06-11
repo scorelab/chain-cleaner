@@ -5,7 +5,6 @@ import 'react-select/dist/react-select.css';
 import HeistTimeline from './Timeline'
 import AddHeistButton from './AddHeistButton'
 
-
 const ReportPage = () =>
   <div>
     <Navigation/>
@@ -20,10 +19,10 @@ class ReportForm extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h3>Reported Heists</h3>
-                            <AddHeistButton />
+                             <AddHeistButton />
                         <hr/>
                         <div className="middle-pages-2">
-                             <HeistTimeline/>
+                             <HeistTimeline />
                         </div>
                     </div>
                 </div>

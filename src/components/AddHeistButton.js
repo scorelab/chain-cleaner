@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import AuthUserContext from './AuthUserContext';
 
 
+
 const AddHeistButton = () =>
   <AuthUserContext.Consumer>
     {authUser => authUser
@@ -20,19 +21,18 @@ const FORM_STATE = {
   heistName:'',
   description: '',
   extra: '',
-  type: '',
+  type: 'Low',
   error: null,
+  open: false,
 };
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
 });
 
-let recaptchaField = '';
-let transactionsTags = '';
-let transactionId = 0;
-let addressesTags = '';
-let addressesId = 0;
+let recaptchaField = false;
+let transactionsTags;
+let addressesTags;
 
 const TransactionMulti = createClass({
 	displayName: 'CreatableDemo',
@@ -49,14 +49,13 @@ const TransactionMulti = createClass({
 			value: undefined
 		};
 	},
-	handleOnChange (value) {
+	handleOnChange (values) {
 		const { multi } = this.state;
 		if (multi) {
-		    transactionsTags += value[transactionId].value+",";
-		    transactionId += 1;
-			this.setState({ transactions: value });
+			this.setState({ transactions: values });
+			transactionsTags = values;
 		} else {
-			this.setState({ value });
+			this.setState({ values });
 		}
 	},
 	render () {
@@ -92,8 +91,7 @@ const AddressMulti = createClass({
 	handleOnChange (value) {
 		const { multi } = this.state;
 		if (multi) {
-		    addressesTags += value[addressesId].value+",";
-		    addressesId += 1;
+		    addressesTags = value;
 			this.setState({ addresses: value });
 		} else {
 			this.setState({ value });
@@ -125,44 +123,69 @@ class NewHeistButtonAuth extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    state = {
-        open: false
-    };
-
     onOpenModal = () => {
         this.setState({ open: true });
       };
 
-      onCloseModal = () => {
+    onCloseModal = () => {
         this.setState({ open: false });
       };
 
-     handleSubmit(event){
-        event.preventDefault();
-        const {
-            heistName,
-            description,
-            type,
-        } = this.state;
+    handleSubmit(event) {
+        if (!recaptchaField) {
+            event.preventDefault();
+            alert("Please verify the Re-CAPTCHA!");
+        } else {
+            event.preventDefault();
+            const {
+                heistName,
+                description,
+                type,
+            } = this.state;
 
-        console.log(heistName+description+type);
-        console.log(transactionsTags);
-        console.log(addressesTags);
+            let transactions = [];
+            let addresses = [];
+            let today = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
 
-        this.reportRef.push({
-          heistName: heistName,
-          description: description,
-          type: type,
-          transactionsTags: transactionsTags,
-          addressesTags: addressesTags
-        });
+            if (typeof addressesTags === 'undefined') {
+                alert("Please insert address(s)!");
+            } else {
+                for (let s = 0; s < addressesTags.length; s++) {
+                    addresses[s] = addressesTags[s].value;
+                }
+            }
 
-       alert("Submitted Successfully!");
-       window.location.reload();
+            if (typeof transactionsTags === 'undefined') {
+                alert("Please insert transaction(s)!");
+            } else {
+                for (let s = 0; s < transactionsTags.length; s++) {
+                    transactions[s] = transactionsTags[s].value;
+                }
+            }
+
+            if (!(typeof transactionsTags === 'undefined') && !(typeof addressesTags === 'undefined')) {
+                this.reportRef.push({
+                    heistName: heistName,
+                    description: description,
+                    type: type,
+                    transactionsTags: transactions,
+                    addressesTags: addresses,
+                    time: today
+                });
+
+                alert("Submitted Successfully!");
+                this.setState({...FORM_STATE});
+                recaptchaField = false;
+                this.onCloseModal();
+                location.reload();
+            }
+
+        }
+
     }
 
     onChange(value){
-            recaptchaField = value;
+            recaptchaField = true;
     }
 
     render() {
@@ -173,73 +196,72 @@ class NewHeistButtonAuth extends Component {
             error,
         } = this.state;
 
-         const { open } = this.state;
-
          const isInvalid =
-             recaptchaField === '';
+              heistName === '' ||
+              description === '';
 
         return(
-           <div className="pull-right">
-        <button type="button" className="btn btn-warning newHeistButton" onClick={this.onOpenModal}>
-            <span className="fa fa-plus"/> Add New Heists
-        </button>
-        <Modal open={open} onClose={this.onCloseModal} center>
-            <div className="heistPopup">
-                <h4>Report New Heists</h4>
-                <hr/>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlInput1">Heists Name</label>
-                        <input
-                            value={heistName}
-                            onChange={event => this.setState(byPropKey('heistName', event.target.value))}
-                            type="text"
-                            className="form-control"
-                        />
+            <div className="pull-right">
+                <button type="button" className="btn btn-warning newHeistButton" onClick={this.onOpenModal}>
+                    <span className="fa fa-plus"/> Add New Heists
+                </button>
+                <Modal open={this.state.open} onClose={this.onCloseModal} center>
+                    <div className="heistPopup">
+                        <h4>Report New Heists</h4>
+                        <hr/>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlInput1">Heists Name</label>
+                                <input
+                                    value={heistName}
+                                    onChange={event => this.setState(byPropKey('heistName', event.target.value))}
+                                    type="text"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlTextarea1">Description</label>
+                                <textarea className="form-control" id="exampleFormControlTextarea1" rows="1"
+                                          value={description}
+                                          onChange={event => this.setState(byPropKey('description', event.target.value))}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlSelect1">Type</label>
+                                <select className="form-control" id="exampleFormControlSelect1"
+                                        value={type}
+                                        onChange={event => this.setState(byPropKey('type', event.target.value))}
+                                >
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>Affected</option>
+                                    <option>High</option>
+                                    <option>Danger</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label>Transactions</label>
+                                <TransactionMulti/>
+                            </div>
+                            <div className="form-group">
+                                <label>Address</label>
+                                <AddressMulti/>
+                            </div>
+                            <div className="form-group">
+                                <ReCAPTCHA
+                                    ref="recaptcha"
+                                    sitekey="6LchelcUAAAAAGZwre6ZHG3-cDp0QZzwS1xxZGEx"
+                                    onChange={this.onChange}
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary mb-2" disabled={isInvalid} style={{marginBottom: "30px"}}>
+                                Submit New Heist
+                            </button>
+                            {error && <p style={{color: '#aa1d1d'}}>{error.message}</p>}
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlTextarea1">Description</label>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="1"
-                                  value={description}
-                                  onChange={event => this.setState(byPropKey('description', event.target.value))}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlSelect1">Type</label>
-                        <select className="form-control" id="exampleFormControlSelect1"
-                                value={type}
-                                onChange={event => this.setState(byPropKey('type', event.target.value))}
-                        >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label>Transactions</label>
-                        <TransactionMulti/>
-                    </div>
-                    <div className="form-group">
-                        <label>Address</label>
-                        <AddressMulti/>
-                    </div>
-                    <div className="form-group">
-                        <ReCAPTCHA
-                            ref="recaptcha"
-                            sitekey="6LchelcUAAAAAGZwre6ZHG3-cDp0QZzwS1xxZGEx"
-                            onChange={this.onChange}
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary mb-2" disabled={isInvalid}
-                            style={{marginBottom: "30px"}}>Submit Heist
-                    </button>
-                    {error && <p style={{color: '#aa1d1d'}}>{error.message}</p>}
-                </form>
+                </Modal>
             </div>
-        </Modal>
-    </div>
         );
     }
 }

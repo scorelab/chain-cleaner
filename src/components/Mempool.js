@@ -7,42 +7,57 @@ class MempoolTable extends Component {
         super();
 
         this.state = {
-          items:[]
+          items:[],
+          noTx:0,
+          totalSize:0
         };
 
     }
 
-    componentDidMount(){
+    tick() {
         let reportRef = database.ref("mempool");
         let newState = [];
         reportRef.once("value").then((snapshot) => {
+                let totalSize = 0;
                 snapshot.forEach((childSnapshot) => {
                     let items = childSnapshot.val();
+                    totalSize += items.weight;
                     newState.push({
-                        time: items.time,
+                        time: new Date(items.time*1000).toString().split("GMT")[0],
                         hash: items.hash,
                         size: items.size,
                         weight: items.weight
                     });
                 });
-                this.setState({ items: newState })
-            });
 
+                totalSize = parseFloat(Math.round(totalSize/1024 * 100) / 100).toFixed(2);
+                this.setState({ items: newState });
+                this.setState({ noTx: newState.length });
+                this.setState({ totalSize: totalSize });
+            });
+    }
+
+    componentDidMount(){
+        this.interval = setInterval(() => this.tick(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() {
         return(
             <div className="row" style={{marginTop: "30px"}}>
                 <h4 style={{textAlign: "center", color: "#4D4F4E"}}><b>Memory Pool</b></h4>
-                <h6 style={{textAlign: "center", color: "#4D4F4E"}}>(no of txs: 14, size: 168.81 kB)</h6>
+                <h6 style={{textAlign: "center", color: "#4D4F4E"}}>(no of txs: {this.state.noTx}, total size: {this.state.totalSize} MB)</h6>
                 <div className="col-xl-9 mx-auto" style={{marginTop: "10px"}}>
                     <table id="memPool" className="table table-bordered">
                         <thead>
                         <tr className="table-striped">
-                            <th>AGE [H:M:S]</th>
+                            <th>TIME [d:M:D:Y:H:M:S]</th>
                             <th>TRANSACTION HASH</th>
-                            <th>FEE</th>
                             <th>TX SIZE[KB]</th>
+                            <th>WEIGHT</th>
                         </tr>
                         </thead>
                         <tbody>
