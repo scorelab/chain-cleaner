@@ -26,7 +26,8 @@ class MempoolTable extends Component {
                         time: new Date(items.time*1000).toString().split("GMT")[0],
                         hash: items.hash,
                         size: items.size,
-                        weight: items.weight
+                        weight: items.weight,
+                        isTainted: items.isTainted
                     });
                 });
 
@@ -63,9 +64,9 @@ class MempoolTable extends Component {
                         <tbody>
                           {this.state.items.map((item,key) => {
                             return (
-                                <tr key={key}>
+                                <tr key={key} style={{ backgroundColor: item.isTainted === 1 ? '#ff6363': '#E4E4E4'}}>
                                     <td>{item.time}</td>
-                                    <td><a href="#">{item.hash}</a></td>
+                                    <td><a href="#" style={{color:"#3B4651"}}>{item.hash}</a></td>
                                     <td>{item.size}</td>
                                     <td>{item.weight}</td>
                                 </tr>
